@@ -9,8 +9,8 @@ SOURCE_DIR=$(cd $(dirname $BASH_SOURCE); pwd -P)
 SCRIPT_DIR=${SCRIPT_DIR:-$(cd $(dirname ${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}); pwd -P)}
 # The directory where any generated artifacts should be stored.
 BUILD_DIR="${SCRIPT_DIR}/build"
-CHARTS_DIR=$(cd $SCRIPT_DIR/../../../thirdparty/charts; pwd -P)
-MANIFESTS_DIR=$(cd $SCRIPT_DIR/../../../thirdparty/manifests; pwd -P)
+CHARTS_DIR=$(cd $SOURCE_DIR/../../../thirdparty/charts; pwd -P)
+MANIFESTS_DIR=$(cd $SOURCE_DIR/../../../thirdparty/manifests; pwd -P)
 
 . ${SOURCE_DIR}/logging.sh
 
@@ -225,10 +225,6 @@ CERT_MANAGER_TAG=0.13.1-20201016205232-4c8f3fe38
 CERT_MANAGER_SOLVER_IMAGE=ghcr.io/verrazzano/cert-manager-acmesolver
 CERT_MANAGER_SOLVER_TAG=0.13.1-20201016205234-4c8f3fe38
 
-EXTERNAL_DNS_REPO=verrazzano/external-dns
-EXTERNAL_DNS_TAG=v0.7.1-20201016205338-516bc8b2
-EXTERNAL_DNS_REGISTRY=ghcr.io
-
 GRAFANA_REPO=ghcr.io/verrazzano/grafana
 GRAFANA_TAG=v6.4.4
 
@@ -247,12 +243,6 @@ KEYCLOAK_THEME_IMAGE=ghcr.io/verrazzano/keycloak-oracle-theme:0.8.0-202012212029
 
 MYSQL_IMAGE=ghcr.io/verrazzano/mysql
 MYSQL_IMAGE_TAG=8.0.20
-
-NGINX_INGRESS_CONTROLLER_IMAGE=ghcr.io/verrazzano/nginx-ingress-controller
-NGINX_INGRESS_CONTROLLER_TAG=0.32-20201016205412-8580ea0ef
-
-NGINX_DEFAULT_BACKEND_IMAGE=ghcr.io/verrazzano/nginx-ingress-default-backend
-NGINX_DEFAULT_BACKEND_TAG=0.32-20201016205412-8580ea0ef
 
 RANCHER_IMAGE=ghcr.io/verrazzano/rancher
 RANCHER_TAG=v2.4.3-20201016205256-4988df094
