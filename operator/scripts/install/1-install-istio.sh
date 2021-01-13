@@ -179,7 +179,7 @@ function wait_for_nodes_to_exist {
     fi
 }
 
-action "Checking Kubernetes version" check_kube_version || exit 1
+# action "Checking Kubernetes version" check_kube_version || exit 1
 action "Checking Helm version" check_helm_version || (error "Helm version must be v3.x! Your Helm version is: $(helm version --short)"; exit 1)
 
 # Wait for all cluster nodes to exist, and then to be ready
