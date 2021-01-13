@@ -34,9 +34,7 @@ function install_nginx_ingress_controller()
     local ingress_type=$(get_config_value ".ingress.type")
     EXTRA_NGINX_ARGUMENTS="$EXTRA_NGINX_ARGUMENTS --set controller.service.type=${ingress_type}"
 
-    log "Extra NGINX arguments: ${EXTRA_NGINX_ARGUMENTS}"
-
-    helm upgrade ingress-controller ${NGINX_INGRESS_CHART_DIR} --install --debug \
+    helm upgrade ingress-controller ${NGINX_INGRESS_CHART_DIR} --install \
       --namespace ingress-nginx \
       -f $SCRIPT_DIR/components/ingress-nginx-values.yaml \
       ${EXTRA_NGINX_ARGUMENTS} \
@@ -129,14 +127,7 @@ function install_cert_manager()
     helm upgrade cert-manager ${CERT_MANAGER_CHART_DIR} \
         --install \
         --namespace cert-manager \
-        --set image.repository=$CERT_MANAGER_IMAGE \
-        --set image.tag=$CERT_MANAGER_TAG \
-        --set extraArgs[0]=--acme-http01-solver-image=$CERT_MANAGER_SOLVER_IMAGE:$CERT_MANAGER_SOLVER_TAG \
-        --set cainjector.enabled=false \
-        --set webhook.enabled=false \
-        --set webhook.injectAPIServerCA=false \
-        --set ingressShim.defaultIssuerName=verrazzano-cluster-issuer \
-        --set ingressShim.defaultIssuerKind=ClusterIssuer \
+        -f $SCRIPT_DIR/components/cert-manager-values.yaml \
         ${EXTRA_CERT_MANAGER_ARGUMENTS} \
         --wait \
         || return $?
@@ -206,9 +197,7 @@ function install_rancher()
     # Do not add --wait since helm install will not fully work in OLCNE until MKNOD is added in the next command
     helm upgrade rancher ${RANCHER_CHART_DIR} \
       --install --namespace cattle-system \
-      --set systemDefaultRegistry=ghcr.io/verrazzano \
-      --set rancherImage=$RANCHER_IMAGE \
-      --set rancherImageTag=$RANCHER_TAG \
+      -f $SCRIPT_DIR/components/rancher-values.yaml \
       --set hostname=rancher.${NAME}.${DNS_SUFFIX} \
       --set ingress.tls.source=${INGRESS_TLS_SOURCE} \
       ${EXTRA_RANCHER_ARGUMENTS}
