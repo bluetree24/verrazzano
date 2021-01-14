@@ -2,8 +2,8 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 global:
-  hub: ghcr.io/verrazzano
-  tag: 1.4.6
+  hub: istio
+  tag: 1.4.10
 gateways:
   istio-ingressgateway:
     ports:
@@ -18,12 +18,13 @@ sidecarInjectorWebhook:
   rewriteAppHTTPProbe: true
 grafana:
   enabled: true
-  imagerepository: ghcr.io/verrazzano/grafana
-  image.tag: v6.4.4
+  image:
+    repository: grafana
+    tag: 6.4.4
 prometheus:
-  hub: ghcr.io/verrazzano
+  hub: bitnami
   tag: v2.13.1
 istiocoredns:
-  coreDNSImage: ghcr.io/verrazzano/coredns
-  coreDNSTag: 1.6.2
-  coreDNSPluginImage: ghcr.io/verrazzano/istio-coredns-plugin:0.2-20201016204812-23723dcb
+  coreDNSImage: istio/coredns
+  coreDNSTag: 0.2-istio-1.1
+  coreDNSPluginImage: istio/coredns-plugin:0.2-istio-1.1
