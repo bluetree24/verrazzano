@@ -19,12 +19,12 @@ sidecarInjectorWebhook:
 grafana:
   enabled: true
   image:
-    repository: grafana
+    repository: grafana/grafana
     tag: 6.4.4
 prometheus:
   hub: bitnami
-  tag: v2.13.1
+  tag: 2.13.1
 istiocoredns:
-  coreDNSImage: istio/coredns
-  coreDNSTag: 0.2-istio-1.1
+  coreDNSImage: coredns/coredns
+  coreDNSTag: 1.8.0
   coreDNSPluginImage: istio/coredns-plugin:0.2-istio-1.1
